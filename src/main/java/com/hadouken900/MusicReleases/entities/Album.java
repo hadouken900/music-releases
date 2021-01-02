@@ -21,7 +21,7 @@ public class Album {
     @Column(name="date")
     private String date;
 
-    @Column(name="img")
+    @Column(name="image")
     private String img;
 
     @Column(name="artist")
