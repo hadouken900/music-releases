@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="topnav">
-    <a class="active" href="#home">Refresh</a>
+    <a class="active" th:href="@{/refresh}">Refresh</a>
 </div>
 <div class="panel">
     <div class="card" th:each="album : ${albums}">
