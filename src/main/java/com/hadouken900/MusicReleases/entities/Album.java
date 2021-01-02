@@ -10,6 +10,14 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Column(name="date")
     private String date;
 
@@ -29,8 +37,7 @@ public class Album {
     private String genre;
 
 
-    public Album(Long id, String date, String img, String artist, String albumName, String year, String genre) {
-        this.id = id;
+    public Album( String date, String img, String artist, String albumName, String year, String genre) {
         this.date = date;
         this.img = img;
         this.artist = artist;
