@@ -73,6 +73,7 @@ public class HtmlHandler {
     private void parseHtmlIntoAlbumObjects(String html) {
         Pattern pattern = Pattern.compile(PATTERN_FOR_PARSING);
         Matcher matcher = pattern.matcher(html);
+        long id = 1;
         while (matcher.find()) {
             String date = matcher.group(1);
             String img = matcher.group(2);
@@ -80,7 +81,8 @@ public class HtmlHandler {
             String albumName = matcher.group(4);
             String year = matcher.group(5);
             String genre = checkForValidSyntax(matcher.group(6));
-            Album album = new Album(date,img,artist,albumName,year,genre);
+            Album album = new Album(id,date,img,artist,albumName,year,genre);
+            id++;
             ALBUM_LIST.add(album);
         }
     }
