@@ -2,20 +2,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-    <title>Новые альбомы</title>
+    <title>New Albums</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link th:href="@{/styles/css/style.css}" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="topnav">
+    <a class="active" href="#home">Refresh</a>
+</div>
 <div class="panel">
     <div class="card" th:each="album : ${albums}">
         <img th:src="${album.img}" alt="albumsImage" style="width:240px; height:240px;">
         <div class="container">
             <h4 th:text="${album.artist}"><b>John Doe</b></h4>
             <p th:text="${album.albumName}">Architect & Engineer</p>
-            <a th:href="@{https://open.spotify.com/search/} + ${album.artist} +' '+ ${album.albumName}" target="_blank"><p>Найти в Spotify</p></a>
+            <a th:href="@{https://open.spotify.com/search/} + ${album.artist} +' '+ ${album.albumName}" target="_blank">
+                <p>
+                    <img th:src="@{https://ru.inettools.net/upload/pqLcYriGZuiG3Z4CFFNh4txsQlIeWvFZUQa86Qpn/19-195415_connect-with-spotify-lofi-hip-hop.UPwtB.png}" alt="spot logo"/>
+                Найти в Spotify
+                </p>
+            </a>
         </div>
     </div>
 </div>

@@ -1,13 +1,33 @@
 package com.hadouken900.MusicReleases.entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "release")
 public class Album {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name="date")
     private String date;
+
+    @Column(name="img")
     private String img;
+
+    @Column(name="artist")
     private String artist;
+
+    @Column(name="album")
     private String albumName;
+
+    @Column(name="year")
     private String year;
+
+    @Column(name="genre")
     private String genre;
+
 
     public Album(String date, String img, String artist, String albumName, String year, String genre) {
         this.date = date;
