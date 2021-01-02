@@ -82,7 +82,7 @@ public class HtmlHandler {
             String albumName = matcher.group(4);
             String year = matcher.group(5);
             String genre = checkForValidSyntax(matcher.group(6));
-            System.out.println("-----------id = " + id + "-------------------------");
+            //System.out.println("-----------id = " + id + "-------------------------");
             Album album = new Album(date,img,artist,albumName,year,genre);
 
             ALBUM_LIST.add(album);
