@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Album {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private Long id;
 
     public Long getId() {
@@ -37,8 +38,8 @@ public class Album {
     private String genre;
 
 
-    public Album(Long id,String date, String img, String artist, String albumName, String year, String genre) {
-        this.id = id;
+    public Album(String date, String img, String artist, String albumName, String year, String genre) {
+
         this.date = date;
         this.img = img;
         this.artist = artist;
