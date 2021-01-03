@@ -3,6 +3,7 @@ package com.hadouken900.MusicReleases.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name="albums")
 public class Album {
 
     @Id
@@ -96,6 +97,6 @@ public class Album {
 
     @Override
     public String toString() {
-        return "[" + artist+ " - " + albumName + ": "+year+", "+ date + ", " + img + ", " + genre+ "]";
+        return id + "[" + artist+ " - " + albumName + ": "+year+", "+ date + ", " + img + ", " + genre+ "]";
     }
 }
