@@ -97,7 +97,7 @@ public class HtmlHandler {
 
             System.out.println(album);
 
-            album.setId(i);
+            album.setId(Long.valueOf(i));
             i++;
             ALBUM_LIST.add(album);
         }
