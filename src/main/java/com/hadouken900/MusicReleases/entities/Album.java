@@ -8,6 +8,7 @@ public class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name="id")
     private Long id;
 
     @Column(name="date")
