@@ -3,6 +3,7 @@ package com.hadouken900.MusicReleases.services;
 import com.hadouken900.MusicReleases.entities.Album;
 import com.hadouken900.MusicReleases.repositories.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,10 @@ public class AlbumService {
 
     public List<Album> getAllAlbums() {
         return albumRepository.findAll();
+    }
+
+    public List<Album> getAlbumsByFilteredGenre(String filter){
+        return albumRepository.findByGenreContainingIgnoreCase(filter);
     }
 
     public void saveAllAlbums(List<Album> list) {
