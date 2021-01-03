@@ -20,7 +20,7 @@
             <p th:text="${album.albumName}">Architect & Engineer</p>
             <a th:href="@{https://open.spotify.com/search/} + ${album.artist} +' '+ ${album.albumName}" target="_blank">
                 <p>
-                    <img th:src="@{images/spot.png}" alt="spot logo"/>
+                    <img th:src="@{/images/spot.png}" alt="spot logo"/>
                 Найти в Spotify
                 </p>
             </a>
