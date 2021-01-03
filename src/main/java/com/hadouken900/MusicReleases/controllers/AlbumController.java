@@ -31,6 +31,8 @@ public class AlbumController {
     @GetMapping
     public String showAlbumList(Model model) {
 
+        HtmlHandler handler = new HtmlHandler(url);
+        handler.init();
         albums = albumService.getAllAlbums();
         model.addAttribute("albums", albums);
         return "albums";
