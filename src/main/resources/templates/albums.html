@@ -16,14 +16,20 @@
     <div class="card" th:each="album : ${albums}">
         <img th:src="${album.img}" alt="albumsImage" style="width:240px; height:240px;">
         <div class="container">
-            <h4 th:text="${album.artist}"><b>John Doe</b></h4>
-            <p th:text="${album.albumName}">Architect & Engineer</p>
-            <p th:text="${album.genre}">Architect & Engineer</p>
+            <h4 th:text="${album.artist}"><b></b></h4>
+            <p th:text="${album.albumName}"></p>
+            <p th:text="${album.genre}"></p>
             <p></p>
             <a th:href="@{https://open.spotify.com/search/} + ${album.artist} +' '+ ${album.albumName}" target="_blank">
                 <p>
                     <img th:src="@{images/spot.png}" alt="spot logo"/>
                 Найти в Spotify
+                </p>
+            </a>
+            <a th:href="@{https://music.apple.com/us/search?term=}  + ${album.artist} +' '+ ${album.albumName}" target="_blank">
+                <p>
+                    <img th:src="@{images/apple.png}" alt="apple music logo"/>
+                    Найти в Apple Music
                 </p>
             </a>
         </div>
