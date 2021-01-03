@@ -1,6 +1,8 @@
 package com.hadouken900.MusicReleases;
 
 import com.hadouken900.MusicReleases.entities.Album;
+import com.hadouken900.MusicReleases.services.AlbumService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +19,13 @@ import java.util.regex.Pattern;
 
 
 public class HtmlHandler {
+
+    AlbumService albumService;
+
+    @Autowired
+    public void setAlbumService(AlbumService albumService) {
+        this.albumService = albumService;
+    }
 
     private static final String PATTERN_FOR_PARSING = "<span class=\"clock\"> On (.*?)<.*?src=\"(.*?)\".*?<b>(.*?)<.*?<b>(.*?)<.*?Released: <b>(.*?)<.*?Style: (.*?)<";
     private static final List<Album> ALBUM_LIST = new ArrayList<>();
@@ -84,7 +93,7 @@ public class HtmlHandler {
             String genre = checkForValidSyntax(matcher.group(6));
             //System.out.println("-----------id = " + id + "-------------------------");
             Album album = new Album(date,img,artist,albumName,year,genre);
-
+            albumService.saveAlbum(album);
             ALBUM_LIST.add(album);
         }
     }

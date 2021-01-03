@@ -42,8 +42,8 @@ public class AlbumController {
         HtmlHandler handler = new HtmlHandler(url);
         handler.init();
         albums = handler.getAlbumList();
-        albumService.clearTable();
-        albumService.saveAllAlbums(albums);
+//        albumService.clearTable();
+//        albumService.saveAllAlbums(albums);
 
         model.addAttribute("albums", albums);
         return "albums";

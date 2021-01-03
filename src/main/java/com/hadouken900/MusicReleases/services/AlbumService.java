@@ -27,4 +27,7 @@ public class AlbumService {
     public void clearTable() {
         albumRepository.deleteAll();
     }
-}
+
+    public void saveAlbum(Album album){
+        albumRepository.save(album);
+    }}
