@@ -18,15 +18,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-@Component
 public class HtmlHandler {
 
-    AlbumService albumService;
 
-    @Autowired
-    public void setAlbumService(AlbumService albumService) {
-        this.albumService = albumService;
-    }
 
     private static final String PATTERN_FOR_PARSING = "<span class=\"clock\"> On (.*?)<.*?src=\"(.*?)\".*?<b>(.*?)<.*?<b>(.*?)<.*?Released: <b>(.*?)<.*?Style: (.*?)<";
     private static final List<Album> ALBUM_LIST = new ArrayList<>();
@@ -94,6 +88,7 @@ public class HtmlHandler {
             String genre = checkForValidSyntax(matcher.group(6));
             //System.out.println("-----------id = " + id + "-------------------------");
             Album album = new Album(date,img,artist,albumName,year,genre);
+            AlbumService albumService = new AlbumService();
             albumService.saveAlbum(album);
             ALBUM_LIST.add(album);
         }
