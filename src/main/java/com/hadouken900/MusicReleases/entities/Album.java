@@ -3,7 +3,6 @@ package com.hadouken900.MusicReleases.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "release")
 public class Album {
 
     @Id
@@ -18,22 +17,17 @@ public class Album {
         this.id = id;
     }
 
-    @Column(name="date")
+
     private String date;
 
-    @Column(name="image")
     private String img;
 
-    @Column(name="artist")
     private String artist;
 
-    @Column(name="album")
     private String albumName;
 
-    @Column(name="year")
     private String year;
 
-    @Column(name="genre")
     private String genre;
 
 
