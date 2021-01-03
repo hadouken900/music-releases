@@ -78,16 +78,15 @@ public class HtmlHandler {
         Pattern pattern = Pattern.compile(PATTERN_FOR_PARSING);
         Matcher matcher = pattern.matcher(html);
 
-        System.out.println("----------albums-------------------");
         Long i = 1L;
         while (matcher.find()) {
             String date = matcher.group(1);
             String img = matcher.group(2);
-            String artist = matcher.group(3);
-            String albumName = matcher.group(4);
+            String artist = checkForValidSyntax(matcher.group(3));
+            String albumName = checkForValidSyntax(matcher.group(4));
             String year = matcher.group(5);
             String genre = checkForValidSyntax(matcher.group(6));
-            //System.out.println("-----------id = " + id + "-------------------------");
+
             Album album = new Album();
             album.setImg(img);
             album.setAlbumName(albumName);
@@ -98,15 +97,17 @@ public class HtmlHandler {
 
             album.setId(i);
             i++;
-            System.out.println(album);
             ALBUM_LIST.add(album);
         }
     }
 
-    private String checkForValidSyntax(String genre) {
-        if (genre.contains("&#038;")){
-            genre =  genre.replace("&#038;", "&");
+    private String checkForValidSyntax(String s) {
+        if (s.contains("&#038;")){
+            s =  s.replace("&#038;", "&");
         }
-        return genre;
+        else if(s.contains("&#8217")) {
+            s = s.replace("&#8217", "'");
+        }
+        return s;
     }
 }
