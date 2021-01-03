@@ -95,6 +95,8 @@ public class HtmlHandler {
             album.setDate(date);
             album.setGenre(genre);
 
+            System.out.println(album);
+
             album.setId(i);
             i++;
             ALBUM_LIST.add(album);
@@ -105,8 +107,8 @@ public class HtmlHandler {
         if (s.contains("&#038;")){
             s =  s.replace("&#038;", "&");
         }
-        else if(s.contains("&#8217")) {
-            s = s.replace("&#8217", "'");
+        else if(s.contains("&#8217;")) {
+            s = s.replace("&#8217;", "'");
         }
         return s;
     }
