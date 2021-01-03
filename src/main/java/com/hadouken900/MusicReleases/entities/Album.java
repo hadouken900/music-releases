@@ -10,20 +10,20 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name="date")
     private String date;
-    @Column
+    @Column(name="img")
     private String img;
-    @Column
+    @Column(name="artist")
     private String artist;
 
     @Column(name="album")
     private String albumName;
 
-    @Column
+    @Column(name="year")
     private String year;
 
-    @Column
+    @Column(name="genre")
     private String genre;
 
     public Long getId() {
