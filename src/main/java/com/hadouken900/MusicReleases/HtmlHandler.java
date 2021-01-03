@@ -75,7 +75,6 @@ public class HtmlHandler {
         Pattern pattern = Pattern.compile(PATTERN_FOR_PARSING);
         Matcher matcher = pattern.matcher(html);
 
-        Long i = 1L;
         while (matcher.find()) {
             String date = matcher.group(1);
             String img = matcher.group(2);
@@ -92,9 +91,6 @@ public class HtmlHandler {
             album.setDate(date);
             album.setGenre(genre);
 
-
-            album.setId(i);
-            i++;
             ALBUM_LIST.add(album);
         }
     }
