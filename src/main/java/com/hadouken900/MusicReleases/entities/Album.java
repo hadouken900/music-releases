@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Album {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name="id")
     private Long id;
 
