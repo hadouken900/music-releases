@@ -3,6 +3,7 @@ package com.hadouken900.MusicReleases;
 import com.hadouken900.MusicReleases.entities.Album;
 import com.hadouken900.MusicReleases.services.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-
+@Component
 public class HtmlHandler {
 
     AlbumService albumService;
