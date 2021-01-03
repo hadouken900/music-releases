@@ -1,9 +1,6 @@
 package com.hadouken900.MusicReleases;
 
 import com.hadouken900.MusicReleases.entities.Album;
-import com.hadouken900.MusicReleases.services.AlbumService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -96,7 +93,7 @@ public class HtmlHandler {
             album.setGenre(genre);
 
 
-            album.setId(Long.valueOf(i));
+            album.setId(i);
             i++;
             ALBUM_LIST.add(album);
         }
