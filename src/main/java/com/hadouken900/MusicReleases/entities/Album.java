@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class Album {
 
     @Id
-    @GeneratedValue
-    @Column(name="id")
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name="date")
@@ -27,16 +26,10 @@ public class Album {
     @Column(name="genre")
     private String genre;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Album(Long id, String date, String img, String artist, String albumName, String year, String genre) {
-        this.id = id;
+    public Album(String date, String img, String artist, String albumName, String year, String genre) {
+
         this.date = date;
         this.img = img;
         this.artist = artist;
@@ -98,6 +91,6 @@ public class Album {
 
     @Override
     public String toString() {
-        return id + "[" + artist+ " - " + albumName + ": "+year+", "+ date + ", " + img + ", " + genre+ "]";
+        return "[" + artist+ " - " + albumName + ": "+year+", "+ date + ", " + img + ", " + genre+ "]";
     }
 }
