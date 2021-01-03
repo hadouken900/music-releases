@@ -3,11 +3,11 @@ package com.hadouken900.MusicReleases.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="releases")
+@Table(name="albums")
 public class Album {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name="date")
