@@ -9,17 +9,20 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-
+    @Column
     private String date;
+    @Column
     private String img;
+    @Column
     private String artist;
 
     @Column(name="album")
     private String albumName;
 
+    @Column
     private String year;
 
+    @Column
     private String genre;
 
     public Long getId() {
@@ -30,8 +33,8 @@ public class Album {
         this.id = id;
     }
 
-    public Album(String date, String img, String artist, String albumName, String year, String genre) {
-
+    public Album(Long id, String date, String img, String artist, String albumName, String year, String genre) {
+        this.id = id;
         this.date = date;
         this.img = img;
         this.artist = artist;

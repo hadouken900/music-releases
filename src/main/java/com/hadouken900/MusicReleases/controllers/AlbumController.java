@@ -31,8 +31,6 @@ public class AlbumController {
     @GetMapping
     public String showAlbumList(Model model) {
 
-        HtmlHandler handler = new HtmlHandler(url);
-        handler.init();
         albums = albumService.getAllAlbums();
         model.addAttribute("albums", albums);
         return "albums";
@@ -44,8 +42,8 @@ public class AlbumController {
         HtmlHandler handler = new HtmlHandler(url);
         handler.init();
         albums = handler.getAlbumList();
-//        albumService.clearTable();
-//        albumService.saveAllAlbums(albums);
+        albumService.clearTable();
+        albumService.saveAllAlbums(albums);
 
         model.addAttribute("albums", albums);
         return "albums";
