@@ -93,6 +93,7 @@ public class HtmlHandler {
             album.setAlbumName(albumName);
             album.setArtist(artist);
             album.setYear(year);
+            album.setDate(date);
             album.setGenre(genre);
 
             album.setId(i);
