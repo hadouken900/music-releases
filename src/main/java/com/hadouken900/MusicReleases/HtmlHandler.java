@@ -95,7 +95,6 @@ public class HtmlHandler {
             album.setDate(date);
             album.setGenre(genre);
 
-            System.out.println(album);
 
             album.setId(Long.valueOf(i));
             i++;
