@@ -18,6 +18,8 @@
         <div class="container">
             <h4 th:text="${album.artist}"><b>John Doe</b></h4>
             <p th:text="${album.albumName}">Architect & Engineer</p>
+            <p th:text="${album.genre}">Architect & Engineer</p>
+            <p></p>
             <a th:href="@{https://open.spotify.com/search/} + ${album.artist} +' '+ ${album.albumName}" target="_blank">
                 <p>
                     <img th:src="@{images/spot.png}" alt="spot logo"/>
