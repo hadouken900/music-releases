@@ -7,8 +7,9 @@ import javax.persistence.*;
 public class Album {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id = 0L;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="album_generator", sequenceName = "album_seq", allocationSize=50)
+    private Long id;
 
     public Long getId() {
         return id;
