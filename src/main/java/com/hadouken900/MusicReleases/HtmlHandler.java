@@ -83,13 +83,7 @@ public class HtmlHandler {
             String year = matcher.group(5);
             String genre = checkForValidSyntax(matcher.group(6));
 
-            Album album = new Album();
-            album.setImg(img);
-            album.setAlbumName(albumName);
-            album.setArtist(artist);
-            album.setYear(year);
-            album.setDate(date);
-            album.setGenre(genre);
+            Album album = new Album(date, img, artist, albumName, year,genre);
 
             ALBUM_LIST.add(album);
         }

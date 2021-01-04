@@ -7,38 +7,20 @@ import javax.persistence.*;
 public class Album {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name="album_generator", sequenceName = "album_seq", allocationSize=50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Column(name="date")
-    private String date;
-    @Column(name="img")
-    private String img;
-    @Column(name="artist")
-    private String artist;
 
     @Column(name="album")
     private String albumName;
-
-    @Column(name="year")
+    private String date;
+    private String img;
+    private String artist;
     private String year;
-
-    @Column(name="genre")
     private String genre;
 
 
 
     public Album(String date, String img, String artist, String albumName, String year, String genre) {
-
         this.date = date;
         this.img = img;
         this.artist = artist;
@@ -48,6 +30,14 @@ public class Album {
     }
 
     public Album() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDate() {
