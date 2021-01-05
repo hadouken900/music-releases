@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
     <title>Music Releases</title>
@@ -12,10 +13,27 @@
 <body>
 <div class="topnav">
     <a class="active" th:href="@{/refresh}">Refresh</a>
-    <form th:action="@{/filter}" method="post">
+    <form th:action="@{/filter}" method="post" class="filter">
         <input th:value="${filter}" placeholder="filter genre" name="filter"/>
         <button type="submit">find</button>
     </form>
+
+
+    <a sec:authorize="isAnonymous()" class="active login" th:href="@{/registration}">Sign in</a>
+    <form sec:authorize="isAnonymous()" th:action="@{/authenticateTheUser}" method="post" class="login">
+        <input placeholder="username" name="username"/>
+        <input placeholder="password" name="password"/>
+        <button type="submit">log in</button>
+    </form>
+    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="login">
+        <button type="submit">logout</button>
+    </form>
+    <p sec:authorize="isAuthenticated()" class="active namefield" >
+        You are logged in as:
+        <span  sec:authentication="name"></span>
+    </p>
+
+
 </div>
 <div class="panel">
     <div class="card" th:each="album : ${albums}">

@@ -45,9 +45,21 @@
   background-color: #ddd;
   color: black;
 }
-
+form {
+  float:left;
+}
+.login {
+  float:right;
+}
+.active.login {
+  float:right;
+}
 /* Add a color to the active/current link */
 .topnav a.active {
   background-color: #4CAF50;
   color: white;
+}
+.topnav p.active {
+    float: right;
+    color: white;
 }
