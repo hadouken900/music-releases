@@ -37,7 +37,7 @@
     <a sec:authorize="isAuthenticated()" class="login" th:href="@{/profile/} + ${#authentication.name}">
         Show my favorites
     </a>
-    <a th:href="@{/clear}">clear table</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/clear}">clear table</a>
 </div>
 
 
