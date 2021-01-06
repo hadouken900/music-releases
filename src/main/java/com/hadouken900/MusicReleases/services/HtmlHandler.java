@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 последующие /category/cat/page/x/ , где х - номер страницы.
 
 */
-
 public class HtmlHandler {
 
     /*

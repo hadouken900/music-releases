@@ -7,67 +7,87 @@
     <title>Your Favorite Albums</title>
     <link th:href="@{/images/favicon1.png}" rel="shortcut icon" type="image/png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link th:href="@{/styles/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/styles/css/style.css}" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
+<!--THIS IS THE PROFILE PAGE-->
+
+<!--NAVIGATION BAR-->
 <div class="topnav">
+
+<!--    REFRESH BUTTON-->
     <a id="refr" sec:authorize="hasRole('ROLE_ADMIN')" class="active" th:href="@{/refresh}">Refresh</a>
+
+<!--    FILTER FORM-->
     <form th:action="@{/profile/filter}" method="post" class="filter">
         <input id="filtUser" th:value="${filter}" placeholder="filter genre" name="filter"/>
         <button type="submit">find</button>
     </form>
 
-
+<!--    REGISTRATION BUTTON-->
     <a sec:authorize="isAnonymous()" class="active login" th:href="@{/registration}">Sign in</a>
+
+<!--    LOGIN FORM-->
     <form sec:authorize="isAnonymous()" th:action="@{/authenticateTheUser}" method="post" class="login">
         <input placeholder="username" name="username"/>
         <input placeholder="password" name="password"/>
         <button type="submit">log in</button>
     </form>
+
+<!--    LOGOUT FORM-->
     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="login">
         <button type="submit">logout</button>
     </form>
-    <p sec:authorize="isAuthenticated()" class="active" >
+
+<!--    SHOW USERNAME FOR AUTHENTICATED USERS-->
+    <p sec:authorize="isAuthenticated()" class="active">
         You are logged in as:
-        <span  sec:authentication="name"></span>
+        <span sec:authentication="name"></span>
     </p>
+
+<!--    BACK TO MAIN PAGE-->
     <a sec:authorize="isAuthenticated()" class="login" th:href="@{/}">
         Main
     </a>
-
 </div>
 
+
+<!--LIST OF USER'S FAVED ALBUMS-->
 <div id="result" th:fragment="resultsList">
-<div class="panel">
-    <div class="card" th:each="album : ${albums}">
-        <img th:src="${album.img}" alt="albumsImage" style="width:240px; height:240px;">
-        <div class="container">
-            <h4 th:text="${album.artist}"><b></b></h4>
-            <p th:text="${album.albumName}"></p>
-            <p th:text="${album.genre}"></p>
-            <p></p>
-            <a th:href="@{https://open.spotify.com/search/} + ${album.artist} +' '+ ${album.albumName}" target="_blank">
-                <p>
-                    <img th:src="@{/images/spot.png}" alt="spot logo"/>
-                    Найти в Spotify
-                </p>
-            </a>
-            <a th:href="@{https://music.apple.com/us/search?term=}  + ${album.artist} +' '+ ${album.albumName}" target="_blank">
-                <p>
-                    <img th:src="@{/images/apple.png}" alt="apple music logo"/>
-                    Найти в Apple Music
-                </p>
-            </a>
-            <a sec:authorize="isAuthenticated()" th:href="'/'+${#authentication.name}+'/delete/' + ${album.id}"  >
-                Удалить из избранного
-            </a>
+    <div class="panel">
+        <div class="card" th:each="album : ${albums}">
+            <img th:src="${album.img}" alt="albumsImage" style="width:240px; height:240px;">
+            <div class="container">
+                <h4 th:text="${album.artist}"><b></b></h4>
+                <p th:text="${album.albumName}"></p>
+                <p th:text="${album.genre}"></p>
+                <p></p>
+                <a th:href="@{https://open.spotify.com/search/} + ${album.artist} +' '+ ${album.albumName}"
+                   target="_blank">
+                    <p>
+                        <img th:src="@{/images/spot.png}" alt="spot logo"/>
+                        Найти в Spotify
+                    </p>
+                </a>
+                <a th:href="@{https://music.apple.com/us/search?term=}  + ${album.artist} +' '+ ${album.albumName}"
+                   target="_blank">
+                    <p>
+                        <img th:src="@{/images/apple.png}" alt="apple music logo"/>
+                        Найти в Apple Music
+                    </p>
+                </a>
+                <a sec:authorize="isAuthenticated()" th:href="'/'+${#authentication.name}+'/delete/' + ${album.id}">
+                    Удалить из избранного
+                </a>
+            </div>
         </div>
     </div>
 </div>
-</div>
 
+<!--JAVASCRIPT FOR USER PAGE-->
 <script type="text/javascript" th:src="@{/script/user_page.js}"></script>
+
 </body>
 </html>
