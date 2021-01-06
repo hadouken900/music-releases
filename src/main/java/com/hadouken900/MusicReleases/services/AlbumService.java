@@ -3,7 +3,6 @@ package com.hadouken900.MusicReleases.services;
 import com.hadouken900.MusicReleases.entities.Album;
 import com.hadouken900.MusicReleases.repositories.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

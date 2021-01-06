@@ -1,17 +1,17 @@
 package com.hadouken900.MusicReleases.controllers;
 
-import com.hadouken900.MusicReleases.services.HtmlHandler;
 import com.hadouken900.MusicReleases.entities.Album;
 import com.hadouken900.MusicReleases.entities.User;
 import com.hadouken900.MusicReleases.services.AlbumService;
+import com.hadouken900.MusicReleases.services.HtmlHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -19,39 +19,31 @@ import java.util.List;
 
 @Controller
 public class AlbumController {
-
-    AlbumService albumService;
-
     @Autowired
-    public void setAlbumService(AlbumService albumService) {
-        this.albumService = albumService;
-    }
-
-    private static String url = "https://newalbumreleases.net/category/cat/";
-    private static int currentPage = 0;
-    private static List<Album> albums;
-
+    private AlbumService albumService;
+    private static final String URL = "https://newalbumreleases.net/category/cat/";
 
     @GetMapping
     public String showAlbumList(Model model,@AuthenticationPrincipal User user) {
         if (user != null) {
             model.addAttribute("user_id", user.getId());
         }
-        albums = albumService.getAllAlbums();
+        List<Album> albums = albumService.getAllAlbums();
         model.addAttribute("albums", albums);
         return "albums";
     }
 
     @GetMapping("/refresh")
+    @Secured("ADMIN")
     public String refreshAlbums(Model model, @AuthenticationPrincipal User user) {
 
         if (user != null) {
             model.addAttribute("user_id", user.getId());
         }
 
-        HtmlHandler handler = new HtmlHandler(url);
+        HtmlHandler handler = new HtmlHandler(URL);
         handler.init();
-        albums = handler.getAlbumList();
+        List<Album> albums = handler.getAlbumList();
         albumService.clearTable();
         albumService.saveAllAlbums(albums);
 
@@ -65,32 +57,27 @@ public class AlbumController {
         if (user != null) {
             model.addAttribute("user_id", user.getId());
         }
-        albums = albumService.getAlbumsByFilteredGenre(filter);
+        List<Album> albums = albumService.getAlbumsByFilteredGenre(filter);
         model.addAttribute("albums", albums);
         model.addAttribute("filter", filter);
         return "albums";
     }
 
-    @GetMapping("/ajaxrefresh")
-    @ResponseBody
-    public String refreshWithAjax() {
-
-
-        return "What the fuck is wrong with you?!";
-    }
 
     @GetMapping("/clear")
+    @Secured("ADMIN")
     public String clearTable() {
         albumService.clearTable();
         return "albums";
     }
 
     @GetMapping("/ajaxxx")
+    @Secured("ADMIN")
     public ModelAndView showListWithAjax() {
         ModelAndView modelAndView = new ModelAndView("albums :: resultsList");
-        HtmlHandler handler = new HtmlHandler(url);
+        HtmlHandler handler = new HtmlHandler(URL);
         handler.init();
-        albums = handler.getAlbumList();
+        List<Album> albums = handler.getAlbumList();
         albumService.clearTable();
         albumService.saveAllAlbums(albums);
         modelAndView.addObject("albums",albums);
@@ -100,16 +87,15 @@ public class AlbumController {
     }
 
     @GetMapping("/ajaxxxfilt")
-    public ModelAndView ajaxfilterProducts(Model model, @RequestParam String filter,  @AuthenticationPrincipal User user) {
+    public ModelAndView filterWithAjax(Model model, @RequestParam String filter,  @AuthenticationPrincipal User user) {
 
         ModelAndView modelAndView = new ModelAndView("albums :: resultsList");
         if (user != null) {
             model.addAttribute("user_id", user.getId());
 
         }
-        albums = albumService.getAlbumsByFilteredGenre(filter);
+        List<Album> albums = albumService.getAlbumsByFilteredGenre(filter);
         modelAndView.addObject("albums", albums);
-        //model.addAttribute("filter", filter);
         return modelAndView;
     }
 }

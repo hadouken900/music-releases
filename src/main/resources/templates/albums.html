@@ -23,7 +23,8 @@
 <!--    FILTERING FORM-->
     <form th:action="@{/filter}" method="post" class="filter">
         <input id="filtAll" th:value="${filter}" placeholder="filter genre" name="filter"/>
-        <button  type="submit">find</button>
+<!--        NO NEED FOR BUTTON AFTER ADDING AJAX-->
+<!--        <button  type="submit">find</button>-->
     </form>
 
 <!--    REGISTRATION BUTTON-->

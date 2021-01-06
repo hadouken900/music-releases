@@ -1,6 +1,10 @@
 
+//JS FOR USER PAGE
+
 const main = document.getElementById('result');
 const filtUser = document.getElementById('filtUser');
+
+//FILTERING FAVED ALBUMS
 filtUser.addEventListener('input', () =>
 {
     const request = new XMLHttpRequest();

@@ -22,8 +22,6 @@ public class UserService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
     @Autowired
-    RoleRepository roleRepository;
-    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
@@ -43,10 +41,6 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-    }
-
     public User findUserById(Long userId) {
         Optional<User> userFromDb = userRepository.findById(userId);
         return userFromDb.orElse(new User());
@@ -63,14 +57,10 @@ public class UserService implements UserDetailsService {
             return false;
         }
         HashSet<Role> hashSet = new HashSet<>();
-        if (user.getUsername().equals("admin") && user.getPassword().equals("admin")) {
-            hashSet.add(new Role(2L, "ROLE_ADMIN"));
-        }
         hashSet.add(new Role(1L, "ROLE_USER"));
         user.setRoles(hashSet);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-
         return true;
     }
 
@@ -82,7 +72,7 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
-
-
-
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
 }

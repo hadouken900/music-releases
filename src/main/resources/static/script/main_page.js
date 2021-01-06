@@ -1,9 +1,12 @@
 
+//JS FOR MAIN PAGE
+
 const main = document.getElementById('result');
 const filtAll = document.getElementById('filtAll');
 const button = document.getElementById('refr');
 
 
+//AJAX REQUEST FOR FILTERING
 filtAll.addEventListener('input', () =>
 {
     const request = new XMLHttpRequest();
@@ -22,6 +25,8 @@ filtAll.addEventListener('input', () =>
     });
     request.send();
 });
+
+//AJAX REQUEST FOR REFRESH LIST OF ALBUMS
 button.addEventListener('click',() =>{
     const request = new XMLHttpRequest();
     const url = "/ajaxxx";

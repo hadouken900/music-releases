@@ -11,12 +11,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.sql.DataSource;
-
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class  SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -32,11 +30,9 @@ public class  SecurityConfig  extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                     .anyRequest().permitAll()
                 .and()
-                    .csrf().ignoringAntMatchers("/h2-console/**")
-//                .antMatchers("/secured/**").hasAnyRole("ADMIN")
-                .and()
+//                    .csrf().ignoringAntMatchers("/h2-console/**") FOR TESTING
+//                .and()
                 .formLogin()
-//                    .loginPage("/login")
                     .loginProcessingUrl("/authenticateTheUser")
                     .permitAll()
                 .and()

@@ -44,7 +44,4 @@ public class UserMusicService {
         return userMusicRepository.findByGenreContainingIgnoreCase(filter);
     }
 
-//    public List<UserMusic> findAllByIdAndFilter(Long id) {
-//
-//    }
 }

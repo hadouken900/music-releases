@@ -58,14 +58,8 @@ form {
 .topnav a.active {
   background-color: #4CAF50;
   color: white;
-
-
-
-
 }
 .topnav p.active {
     float: right;
     color: white;
-
-
 }
