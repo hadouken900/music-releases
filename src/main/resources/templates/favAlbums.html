@@ -13,9 +13,9 @@
 </head>
 <body>
 <div class="topnav">
-    <a sec:authorize="hasRole('ROLE_ADMIN')" class="active" th:href="@{/refresh}">Refresh</a>
+    <a id="refr" sec:authorize="hasRole('ROLE_ADMIN')" class="active" th:href="@{/refresh}">Refresh</a>
     <form th:action="@{/profile/filter}" method="post" class="filter">
-        <input th:value="${filter}" placeholder="filter genre" name="filter"/>
+        <input id="filtUser" th:value="${filter}" placeholder="filter genre" name="filter"/>
         <button type="submit">find</button>
     </form>
 
@@ -38,6 +38,8 @@
     </a>
 
 </div>
+
+<div id="result" th:fragment="resultsList">
 <div class="panel">
     <div class="card" th:each="album : ${albums}">
         <img th:src="${album.img}" alt="albumsImage" style="width:240px; height:240px;">
@@ -64,5 +66,8 @@
         </div>
     </div>
 </div>
+</div>
+
+<script type="text/javascript" th:src="@{/script/user_page.js}"></script>
 </body>
 </html>

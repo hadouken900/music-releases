@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashSet;
 import java.util.List;
@@ -99,5 +100,19 @@ public class UserController {
         model.addAttribute("albums", userMusic);
         return "favAlbums";
 
+    }
+
+    @GetMapping("/ajaxxxfiltuser")
+    public ModelAndView ajaxfilterProducts(Model model, @RequestParam String filter, @AuthenticationPrincipal User user) {
+
+        ModelAndView modelAndView = new ModelAndView("albums :: resultsList");
+
+            List<UserMusic> albums = userMusicService.getAlbumsByFilteredGenre(filter);
+
+            modelAndView.addObject("albums", albums);
+
+
+        //model.addAttribute("filter", filter);
+        return modelAndView;
     }
 }

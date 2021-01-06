@@ -14,17 +14,13 @@
 </head>
 <body>
 <div class="topnav">
-<!--    -->
-    <a  sec:authorize="hasRole('ROLE_ADMIN')" class="active" th:href="@{/refresh}">Refresh</a>
+
+    <!-- Navigation bar -->
+    <a id="refr" sec:authorize="hasRole('ROLE_ADMIN')" class="active" th:href="@{/ajaxxx}">Refresh</a>
     <form th:action="@{/filter}" method="post" class="filter">
-        <input th:value="${filter}" placeholder="filter genre" name="filter"/>
-        <button type="submit">find</button>
+        <input id="filtAll" th:value="${filter}" placeholder="filter genre" name="filter"/>
+        <button  type="submit">find</button>
     </form>
-
-    <button id="button">get</button>
-
-
-
     <a sec:authorize="isAnonymous()" class="active login" th:href="@{/registration}">Sign in</a>
     <form sec:authorize="isAnonymous()" th:action="@{/authenticateTheUser}" method="post" class="login">
         <input placeholder="username" name="username"/>
@@ -41,24 +37,26 @@
     <a sec:authorize="isAuthenticated()" class="login" th:href="@{/profile/} + ${#authentication.name}">
         Show my favorites
     </a>
+    <a th:href="@{/clear}">clear table</a>
+</div>
 
 
-    </div>
-<div class="panel">
-    <div class="card" th:each="album : ${albums}">
-        <img th:src="${album.img}" alt="albumsImage" style="width:240px; height:240px;">
-        <div class="container">
-            <h4 th:text="${album.artist}"><b></b></h4>
-            <p th:text="${album.albumName}"></p>
-            <p th:text="${album.genre}"></p>
-            <p></p>
-            <a th:href="@{https://open.spotify.com/search/} + ${album.artist} +' '+ ${album.albumName}" target="_blank">
-                <p>
-                    <img th:src="@{/images/spot.png}" alt="spot logo"/>
-                Найти в Spotify
-                </p>
-            </a>
-            <a th:href="@{https://music.apple.com/us/search?term=}  + ${album.artist} +' '+ ${album.albumName}" target="_blank">
+<div id="result" th:fragment="resultsList">
+    <div class="panel">
+        <div  class="card" th:each="album : ${albums}">
+            <img th:src="${album.img}" alt="albumsImage" style="width:240px; height:240px;">
+            <div class="container">
+                <h4 th:text="${album.artist}"><b></b></h4>
+                <p th:text="${album.albumName}"></p>
+                <p th:text="${album.genre}"></p>
+                <p></p>
+                <a th:href="@{https://open.spotify.com/search/} + ${album.artist} +' '+ ${album.albumName}" target="_blank">
+                    <p>
+                        <img th:src="@{/images/spot.png}" alt="spot logo"/>
+                    Найти в Spotify
+                    </p>
+                </a>
+                <a th:href="@{https://music.apple.com/us/search?term=}  + ${album.artist} +' '+ ${album.albumName}" target="_blank">
                 <p>
                     <img th:src="@{/images/apple.png}" alt="apple music logo"/>
                     Найти в Apple Music
@@ -69,7 +67,8 @@
             </a>
         </div>
     </div>
+    </div>
 </div>
-<script type="text/javascript" th:src="@{/script/script.js}"></script>
+<script type="text/javascript" th:src="@{/script/main_page.js}"></script>
 </body>
 </html>
