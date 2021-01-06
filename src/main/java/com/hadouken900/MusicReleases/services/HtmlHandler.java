@@ -1,4 +1,4 @@
-package com.hadouken900.MusicReleases;
+package com.hadouken900.MusicReleases.services;
 
 import com.hadouken900.MusicReleases.entities.Album;
 
@@ -14,11 +14,25 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/*
+Класс для парсинга данных с сайта https://newalbumreleases.net
+с помощью регулярного выражения. В конструктор передается урл
+страницы. Первая страница находится /category/cat/ , вторая и
+последующие /category/cat/page/x/ , где х - номер страницы.
+
+*/
 
 public class HtmlHandler {
 
-
-
+    /*
+    Регулярное выражение разбито на 6 групп:
+    1 - дата
+    2 - обложка
+    3 - исполнитель
+    4 - название альбома
+    5 - год выпуска
+    6 - жанр
+    */
     private static final String PATTERN_FOR_PARSING = "<span class=\"clock\"> On (.*?)<.*?src=\"(.*?)\".*?<b>(.*?)<.*?<b>(.*?)<.*?Released: <b>(.*?)<.*?Style: (.*?)<";
     private static final List<Album> ALBUM_LIST = new ArrayList<>();
     private final String urlAddress;
@@ -37,6 +51,7 @@ public class HtmlHandler {
         return ALBUM_LIST;
     }
 
+    //метод для получения тела хтмл страницы
     private String getHtmlPageByURL(String urlString) {
         URL url = null;
         HttpURLConnection urlConnection = null;
@@ -71,6 +86,7 @@ public class HtmlHandler {
         return null;
     }
 
+    //парсинг с помощью Pattern и Matcher
     private void parseHtmlIntoAlbumObjects(String html) {
         Pattern pattern = Pattern.compile(PATTERN_FOR_PARSING);
         Matcher matcher = pattern.matcher(html);
@@ -89,6 +105,8 @@ public class HtmlHandler {
         }
     }
 
+    //В названиях исполнителя, альбома а также жанра, могут содержаться неподдерживаемые символы
+    //Этот метод заменяет невалидные символы
     private String checkForValidSyntax(String s) {
         if (s.contains("&#038;")){
             s =  s.replace("&#038;", "&");

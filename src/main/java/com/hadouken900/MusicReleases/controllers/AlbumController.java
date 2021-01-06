@@ -1,6 +1,6 @@
 package com.hadouken900.MusicReleases.controllers;
 
-import com.hadouken900.MusicReleases.HtmlHandler;
+import com.hadouken900.MusicReleases.services.HtmlHandler;
 import com.hadouken900.MusicReleases.entities.Album;
 import com.hadouken900.MusicReleases.entities.User;
 import com.hadouken900.MusicReleases.services.AlbumService;
