@@ -5,14 +5,16 @@ import com.hadouken900.MusicReleases.repositories.RoleRepository;
 import com.hadouken900.MusicReleases.repositories.UserRepository;
 import com.hadouken900.MusicReleases.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -24,6 +26,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -32,7 +36,15 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
 
-        return user;
+        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),mapRolesToAuthorities(user.getRoles()));
+    }
+
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
     public User findUserById(Long userId) {
@@ -50,10 +62,15 @@ public class UserService implements UserDetailsService {
         if (userFromDB != null) {
             return false;
         }
-
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        HashSet<Role> hashSet = new HashSet<>();
+        if (user.getUsername().equals("admin") && user.getPassword().equals("admin")) {
+            hashSet.add(new Role(2L, "ROLE_ADMIN"));
+        }
+        hashSet.add(new Role(1L, "ROLE_USER"));
+        user.setRoles(hashSet);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+
         return true;
     }
 
@@ -64,6 +81,8 @@ public class UserService implements UserDetailsService {
         }
         return false;
     }
+
+
 
 
 }

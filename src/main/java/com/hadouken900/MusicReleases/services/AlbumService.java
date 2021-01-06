@@ -35,4 +35,9 @@ public class AlbumService {
 
     public void saveAlbum(Album album){
         albumRepository.save(album);
-    }}
+    }
+
+    public Album getAlbumById(Long id) {
+        return albumRepository.getOne(id);
+    }
+}

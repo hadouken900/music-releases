@@ -2,8 +2,10 @@ package com.hadouken900.MusicReleases.controllers;
 
 import com.hadouken900.MusicReleases.HtmlHandler;
 import com.hadouken900.MusicReleases.entities.Album;
+import com.hadouken900.MusicReleases.entities.User;
 import com.hadouken900.MusicReleases.services.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,15 +31,21 @@ public class AlbumController {
 
 
     @GetMapping
-    public String showAlbumList(Model model) {
-
+    public String showAlbumList(Model model,@AuthenticationPrincipal User user) {
+        if (user != null) {
+            model.addAttribute("user_id", user.getId());
+        }
         albums = albumService.getAllAlbums();
         model.addAttribute("albums", albums);
         return "albums";
     }
 
     @GetMapping("/refresh")
-    public String refreshAlbums(Model model) {
+    public String refreshAlbums(Model model, @AuthenticationPrincipal User user) {
+
+        if (user != null) {
+            model.addAttribute("user_id", user.getId());
+        }
 
         HtmlHandler handler = new HtmlHandler(url);
         handler.init();
@@ -50,7 +58,11 @@ public class AlbumController {
     }
 
     @PostMapping("/filter")
-    public String filterProducts(Model model, @RequestParam String filter) {
+    public String filterProducts(Model model, @RequestParam String filter,  @AuthenticationPrincipal User user) {
+
+        if (user != null) {
+            model.addAttribute("user_id", user.getId());
+        }
         albums = albumService.getAlbumsByFilteredGenre(filter);
         model.addAttribute("albums", albums);
         model.addAttribute("filter", filter);

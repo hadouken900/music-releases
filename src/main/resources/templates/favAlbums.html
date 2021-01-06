@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Music Releases</title>
+    <title>Your Favorite Albums</title>
     <link th:href="@{/images/favicon1.png}" rel="shortcut icon" type="image/png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link th:href="@{/styles/css/style.css}" rel="stylesheet" />
@@ -12,9 +13,8 @@
 </head>
 <body>
 <div class="topnav">
-<!--    sec:authorize="hasRole('ADMIN')"-->
-    <a  class="active" th:href="@{/refresh}">Refresh</a>
-    <form th:action="@{/filter}" method="post" class="filter">
+    <a sec:authorize="hasRole('ROLE_ADMIN')" class="active" th:href="@{/refresh}">Refresh</a>
+    <form th:action="@{/profile/filter}" method="post" class="filter">
         <input th:value="${filter}" placeholder="filter genre" name="filter"/>
         <button type="submit">find</button>
     </form>
@@ -33,12 +33,11 @@
         You are logged in as:
         <span  sec:authentication="name"></span>
     </p>
-    <a sec:authorize="isAuthenticated()" class="login" th:href="@{/profile/} + ${#authentication.name}">
-        Show my favorites
+    <a sec:authorize="isAuthenticated()" class="login" th:href="@{/}">
+        Main
     </a>
 
-
-    </div>
+</div>
 <div class="panel">
     <div class="card" th:each="album : ${albums}">
         <img th:src="${album.img}" alt="albumsImage" style="width:240px; height:240px;">
@@ -50,7 +49,7 @@
             <a th:href="@{https://open.spotify.com/search/} + ${album.artist} +' '+ ${album.albumName}" target="_blank">
                 <p>
                     <img th:src="@{/images/spot.png}" alt="spot logo"/>
-                Найти в Spotify
+                    Найти в Spotify
                 </p>
             </a>
             <a th:href="@{https://music.apple.com/us/search?term=}  + ${album.artist} +' '+ ${album.albumName}" target="_blank">
@@ -59,12 +58,11 @@
                     Найти в Apple Music
                 </p>
             </a>
-            <a sec:authorize="isAuthenticated()" th:href="'/'+${#authentication.name}+'/add/' + ${album.id}" >
-                Добавить в избранное
+            <a sec:authorize="isAuthenticated()" th:href="'/'+${#authentication.name}+'/delete/' + ${album.id}"  >
+                Удалить из избранного
             </a>
         </div>
     </div>
 </div>
-
 </body>
 </html>
