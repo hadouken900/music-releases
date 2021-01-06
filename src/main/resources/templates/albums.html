@@ -12,8 +12,8 @@
 </head>
 <body>
 <div class="topnav">
-<!--    sec:authorize="hasRole('ADMIN')"-->
-    <a  class="active" th:href="@{/refresh}">Refresh</a>
+<!--    -->
+    <a  sec:authorize="hasRole('ROLE_ADMIN')" class="active" th:href="@{/refresh}">Refresh</a>
     <form th:action="@{/filter}" method="post" class="filter">
         <input th:value="${filter}" placeholder="filter genre" name="filter"/>
         <button type="submit">find</button>
