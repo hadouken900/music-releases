@@ -1,22 +1,9 @@
 
 const main = document.getElementById('result');
 const filtAll = document.getElementById('filtAll');
+const button = document.getElementById('refr');
 
-document.getElementById('refr').onclick =
-function loadData1(){
-    const request = new XMLHttpRequest();
-    const url = "/ajaxxx";
-    request.open('GET', url);
 
-    request.addEventListener("load", () => {
-    if (request.status === 200) {
-
-        console.log( request.responseText );
-        //main.innerHTML=request.responseText;
-        }
-    });
-    request.send();
-};
 filtAll.addEventListener('input', () =>
 {
     const request = new XMLHttpRequest();
@@ -31,6 +18,20 @@ filtAll.addEventListener('input', () =>
         }
         else {
         console.log('Что то пошло не так');
+        }
+    });
+    request.send();
+});
+button.addEventListener('click',() =>{
+    const request = new XMLHttpRequest();
+    const url = "/ajaxxx";
+    request.open('GET', url);
+
+    request.addEventListener("load", () => {
+    if (request.status === 200) {
+
+        console.log( request.responseText );
+        //main.innerHTML=request.responseText;
         }
     });
     request.send();
