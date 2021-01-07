@@ -22,6 +22,7 @@ public class User implements UserDetails {
 
     private String username;
     private String password;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="users_roles",
     joinColumns = @JoinColumn(name="user_id"),
@@ -31,7 +32,6 @@ public class User implements UserDetails {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
     private List<UserMusic> userMusic;
-
 
     public User(String username, String password) {
         this.username = username;
@@ -60,16 +60,6 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
         return null;
     }
 

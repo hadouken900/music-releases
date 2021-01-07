@@ -34,7 +34,7 @@ public class AlbumController {
     }
 
     @GetMapping("/refresh")
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     public String refreshAlbums(Model model, @AuthenticationPrincipal User user) {
 
         if (user != null) {
@@ -65,14 +65,14 @@ public class AlbumController {
 
 
     @GetMapping("/clear")
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     public String clearTable() {
         albumService.clearTable();
         return "albums";
     }
 
     @GetMapping("/ajaxxx")
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     public ModelAndView showListWithAjax() {
         ModelAndView modelAndView = new ModelAndView("albums :: resultsList");
         HtmlHandler handler = new HtmlHandler(URL);

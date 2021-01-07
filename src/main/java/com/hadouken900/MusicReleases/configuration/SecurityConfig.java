@@ -30,8 +30,8 @@ public class  SecurityConfig  extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                     .anyRequest().permitAll()
                 .and()
-//                    .csrf().ignoringAntMatchers("/h2-console/**") FOR TESTING
-//                .and()
+                    .csrf().ignoringAntMatchers("/h2-console/**")
+                .and()
                 .formLogin()
                     .loginProcessingUrl("/authenticateTheUser")
                     .permitAll()

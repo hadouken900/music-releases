@@ -15,16 +15,6 @@ public class UserMusic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public UserMusic(Long userId, String albumName, String date, String img, String artist, String year, String genre) {
-        this.userId = userId;
-        this.albumName = albumName;
-        this.date = date;
-        this.img = img;
-        this.artist = artist;
-        this.year = year;
-        this.genre = genre;
-    }
-
     @Column(name="user_id")
     private Long userId;
 
@@ -36,4 +26,13 @@ public class UserMusic {
     private String year;
     private String genre;
 
+    public UserMusic(Long userId, String albumName, String date, String img, String artist, String year, String genre) {
+        this.userId = userId;
+        this.albumName = albumName;
+        this.date = date;
+        this.img = img;
+        this.artist = artist;
+        this.year = year;
+        this.genre = genre;
+    }
 }

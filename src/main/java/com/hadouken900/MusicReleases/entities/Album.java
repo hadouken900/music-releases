@@ -22,6 +22,7 @@ public class Album {
     private String year;
     private String genre;
 
+
     public Album(String date, String img, String artist, String albumName, String year, String genre) {
         this.date = date;
         this.img = img;
