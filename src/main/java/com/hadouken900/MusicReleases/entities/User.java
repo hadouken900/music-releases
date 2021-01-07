@@ -38,6 +38,12 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public User(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
