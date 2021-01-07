@@ -32,6 +32,16 @@ public class Album {
         this.genre = genre;
     }
 
+    public Album(Long id, String albumName, String date, String img, String artist, String year, String genre) {
+        this.id = id;
+        this.albumName = albumName;
+        this.date = date;
+        this.img = img;
+        this.artist = artist;
+        this.year = year;
+        this.genre = genre;
+    }
+
     @Override
     public String toString() {
         return "[" + artist+ " - " + albumName + ": "+year+", "+ date + ", " + img + ", " + genre+ "]";

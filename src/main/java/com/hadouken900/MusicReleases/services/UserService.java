@@ -1,9 +1,8 @@
 package com.hadouken900.MusicReleases.services;
 
 import com.hadouken900.MusicReleases.entities.Role;
-import com.hadouken900.MusicReleases.repositories.RoleRepository;
-import com.hadouken900.MusicReleases.repositories.UserRepository;
 import com.hadouken900.MusicReleases.entities.User;
+import com.hadouken900.MusicReleases.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,20 +12,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
 @Service
 public class UserService implements UserDetailsService {
+
     @Autowired
     UserRepository userRepository;
     @Autowired
-    RoleRepository roleRepository;
-    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
-
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -36,9 +35,6 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
 
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        System.out.println(user.getRoles());
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),mapRolesToAuthorities(user.getRoles()));
     }
 

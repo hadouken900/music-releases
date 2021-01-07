@@ -9,12 +9,11 @@ import java.util.List;
 
 @Service
 public class AlbumService {
-    private AlbumRepository albumRepository;
 
     @Autowired
-    public void setAlbumRepository(AlbumRepository albumRepository) {
-        this.albumRepository = albumRepository;
-    }
+    private AlbumRepository albumRepository;
+
+
 
     public List<Album> getAllAlbums() {
         return albumRepository.findAll();
