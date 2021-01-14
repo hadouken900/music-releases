@@ -18,7 +18,7 @@
 
 
 <!--     REFRESH BUTTON -->
-    <a id="refr" sec:authorize="hasRole('ROLE_ADMIN')" class="active" th:href="@{/ajaxxx}">Refresh</a>
+    <a id="refr" sec:authorize="hasRole('ROLE_ADMIN')" class="active r" th:href="@{/ajaxxx}">refresh</a>
 
 <!--    FILTERING FORM-->
     <form th:action="@{/filter}" method="post" class="filter">
@@ -28,7 +28,7 @@
     </form>
 
 <!--    REGISTRATION BUTTON-->
-    <a sec:authorize="isAnonymous()" class="active login" th:href="@{/registration}">Sign in</a>
+    <a sec:authorize="isAnonymous()" class="active login" th:href="@{/registration}">sign in</a>
 
 <!--    LOGIN FORM-->
     <form sec:authorize="isAnonymous()" th:action="@{/authenticateTheUser}" method="post" class="login">
@@ -39,22 +39,22 @@
 
 <!--    LOGOUT BUTTON -->
     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="login">
-        <button type="submit">logout</button>
+        <button type="submit">log out</button>
     </form>
 
 <!--    SHOW USERNAME FOR AUTHENTICATED USERS-->
     <p sec:authorize="isAuthenticated()" class="active" >
-        You are logged in as:
+        <span>you are logged in as:</span>
         <span  sec:authentication="name"></span>
     </p>
 
 <!--    USER'S LIST OF ALBUMS-->
-    <a sec:authorize="isAuthenticated()" class="login" th:href="@{/profile/} + ${#authentication.name}">
-        Show my favorites
+    <a sec:authorize="isAuthenticated()" class="login btn" th:href="@{/profile/} + ${#authentication.name}">
+        show my favorites
     </a>
 
 <!--    CLEAR TABLE-->
-    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/clear}">clear table</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/clear}" class="login btn">clear table</a>
 </div>
 
 

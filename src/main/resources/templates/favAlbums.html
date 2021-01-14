@@ -18,7 +18,7 @@
 <div class="topnav">
 
 <!--    REFRESH BUTTON-->
-    <a id="refr" sec:authorize="hasRole('ROLE_ADMIN')" class="active" th:href="@{/refresh}">Refresh</a>
+    <a id="refr" sec:authorize="hasRole('ROLE_ADMIN')" class="active r" th:href="@{/refresh}">Refresh</a>
 
 <!--    FILTER FORM-->
     <form th:action="@{/profile/filter}" method="post" class="filter">
@@ -44,12 +44,12 @@
 
 <!--    SHOW USERNAME FOR AUTHENTICATED USERS-->
     <p sec:authorize="isAuthenticated()" class="active">
-        You are logged in as:
+        <span>You are logged in as:</span>
         <span sec:authentication="name"></span>
     </p>
 
 <!--    BACK TO MAIN PAGE-->
-    <a sec:authorize="isAuthenticated()" class="login" th:href="@{/}">
+    <a sec:authorize="isAuthenticated()" class="login btn" th:href="@{/}">
         Main
     </a>
 </div>
